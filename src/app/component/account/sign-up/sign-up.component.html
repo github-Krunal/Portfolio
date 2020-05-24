@@ -1,0 +1,91 @@
+  <div class="container">
+    <form [formGroup]="_registrationForm">
+      <!--(ngSubmit)="update()"-->
+      <div class="row">
+        <div class="col-md-8">
+          <div class="form-group">
+            <label for="Username"></label>
+            <input type="text" name="Username" id="Username" autocomplete="off" formControlName="Username"
+              class="form-control" placeholder="Username" (keyup)="searchUsername($event)">
+
+            <div class="alert alert-danger"
+              *ngIf="_registrationForm.get('Username').invalid && _registrationForm.get('Username').touched">
+              <div *ngIf="_registrationForm.controls['Username'].errors.required">
+                required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="alert alert-success" role="alert" *ngIf="IsAvailable">
+            available
+          </div>
+          <div class="alert alert-warning" role="alert" *ngIf="!IsAvailable">
+            not available
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <!-- select gmail values sectiom start -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <input type="text" class="form-control" id="inlineFormInputName" placeholder="gmail ID" autocomplete="off">
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <mat-select placeholder="select gmail" id="gmail" class="form-control" formControlName="GmailSelect">
+              <mat-option>
+                select
+              </mat-option>
+              <mat-option *ngFor="let item of items_Array" [value]="item">
+                {{item}}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="alert alert-dark"
+            *ngIf="_registrationForm.get('GmailSelect').invalid && _registrationForm.get('GmailSelect').touched">
+            <div *ngIf="_registrationForm.controls['GmailSelect'].errors.required">
+              required
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- select gmail values sectiom start End-->
+
+      <!-- password section start -->
+      <div class="form-group">
+        <label for="Password"></label>
+        <input type="text" name="Password" id="Password" formControlName="Password" class="form-control"
+          placeholder="Password" autocomplete="off" #passwordValue>
+        <div class="alert alert-danger" *ngIf="Istouched">
+          <div *ngIf="_IsMinCharacter ">Total minimum 6 character required*</div>
+          <div *ngIf="_IsUpperCase">Mnimum 1 Uppercase letter*</div>
+          <div *ngIf="_IsLowerCase">Minimum 1 Lower case letter*</div>
+          <div *ngIf="_IsNumberCase">1 number*</div>
+          <div *ngIf="_IsSpecialCharacter">1 symbol*</div>
+        </div>
+      </div>
+
+      <!-- password section start -->
+
+
+
+
+
+
+      <!-- button start  -->
+      <button type="submit" class="btn btn-block btn-primary" [disabled]="!_registrationForm.valid"> submit</button>
+
+      <!-- button end  -->
+
+
+    </form>
+  </div>
